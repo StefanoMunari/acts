@@ -1,0 +1,8 @@
+defmodule CoordinationTest do
+  use ExUnit.Case
+  doctest Coordination
+
+  test "the truth" do
+    assert 1 + 1 == 2
+  end
+end
