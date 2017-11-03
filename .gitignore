@@ -1,0 +1,33 @@
+# Object file
+**/obj/
+*.o
+
+*.bak
+
+# Ada Library Information
+*.ali
+*#
+keys.env
+
+# Frontend
+app/frontend/node_modules
+app/frontend/apps/interface/web/.metadata
+app/frontend/apps/interface/.metadata
+app/frontend/apps/interface/.settings
+app/frontend/apps/interface/web/modules/**/*.js*
+app/frontend/apps/interface/web/modules/main/.idea
+*.log
+app/frontend/apps/interface/*.log.*
+app/frontend/apps/interface/node_modules
+app/frontend/apps/interface/priv/static
+app/frontend/apps/interface/typings
+app/frontend/_build
+app/frontend/deps
+
+# Auto-generated file
+config/backend/Dockerfile
+app/backend/src/active/ai/ai_interface.*
+app/backend/src/active/ai/ai_interface_h.ads
+
+# Imported projects
+path-finder/
