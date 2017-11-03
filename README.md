@@ -7,8 +7,9 @@ _Authors:_
 * Stefano Munari
 * Sebastiano Valle
 
-**The team worked coehesively and the commit history does _not_ reflect the actual
-development of this project.**
+**The team worked cohesively to ACTS.
+The commit history does _not_ reflect the actual
+development history of this project.**
 
 Project for the [Concurrent and Distributed Systems course 2015/2016](http://www.math.unipd.it/~tullio/SCD/2015/)
 at [University of Padua - MSc level](http://informatica.math.unipd.it/laureamagistrale/indexen.html).
