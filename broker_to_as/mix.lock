@@ -1,0 +1,10 @@
+%{"amqp": {:hex, :amqp, "0.2.4", "23f888b3f06147a93a71ca57b855d1d5da6ea1aa1214adfc0bec7398c268c999", [:mix], [{:amqp_client, "~> 3.6.8", [hex: :amqp_client, repo: "hexpm", optional: false]}, {:rabbit_common, "~> 3.6.8", [hex: :rabbit_common, repo: "hexpm", optional: false]}], "hexpm"},
+  "amqp_client": {:hex, :amqp_client, "3.6.12", "dfdfe7be661feb96ece404092a47431a73797ad412959732d940f96f80290da0", [:make, :rebar3], [{:rabbit_common, "3.6.12", [hex: :rabbit_common, repo: "hexpm", optional: false]}], "hexpm"},
+  "connection": {:hex, :connection, "1.0.4", "a1cae72211f0eef17705aaededacac3eb30e6625b04a6117c1b2db6ace7d5976", [:mix], [], "hexpm"},
+  "exjsx": {:git, "https://github.com/talentdeficit/exjsx.git", "2c2b745381f8149bbdefe5b34bd0adeb6cdce041", [tag: "4.0.0"]},
+  "gen_stage": {:hex, :gen_stage, "0.12.2", "e0e347cbb1ceb5f4e68a526aec4d64b54ad721f0a8b30aa9d28e0ad749419cbb", [:mix], [], "hexpm"},
+  "jsx": {:hex, :jsx, "2.8.3", "a05252d381885240744d955fbe3cf810504eb2567164824e19303ea59eef62cf", [:mix, :rebar3], [], "hexpm"},
+  "meck": {:hex, :meck, "0.8.8", "eeb3efe811d4346e1a7f65b2738abc2ad73cbe1a2c91b5dd909bac2ea0414fa6", [:rebar3], [], "hexpm"},
+  "mock": {:hex, :mock, "0.2.1", "bfdba786903e77f9c18772dee472d020ceb8ef000783e737725a4c8f54ad28ec", [:mix], [{:meck, "~> 0.8.2", [hex: :meck, repo: "hexpm", optional: false]}], "hexpm"},
+  "rabbit_common": {:hex, :rabbit_common, "3.6.12", "28dfb9ce4decf64caa9d9e70977ab57af983bc2795fd9db349bfc254a8b45235", [:make, :rebar3], [], "hexpm"},
+  "wabbit": {:git, "https://github.com/pma/wabbit", "bdfebf48385301a38e3bf3118a19577091825729", []}}
