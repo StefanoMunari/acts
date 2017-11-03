@@ -1,0 +1,110 @@
+#===============================================================================
+# Deploys the macro-component
+# Frontend (fe)
+# - it represents the application server and the viewer
+# - contains BEAM + NodeJS as base technologies
+#*******************************************************************************
+# NOTE:
+# for variable substitution in KEYS definition check
+# https://github.com/docker/compose/issues/3998
+# It is ONLY supported using default docker enviroment variables
+##******************************************************************************
+version: '3.3'
+services:
+###<INTEGRATION>
+
+## @see
+# https://hub.docker.com/r/library/postgres/
+###service
+    fe_postgres:
+      image: 127.0.0.1:5000/fe_postgres
+      build: ./fe_postgres
+      container_name: fe_postgres
+      deploy:
+        restart_policy:
+          condition: on-failure
+      environment:
+        POSTGRES_USER: cds
+        POSTGRES_DB: fe.TEMPLATE.DB
+
+## @see
+# https://hub.docker.com/_/rabbitmq/
+###service
+    brk_fe_rabbitmq:
+      image: rabbitmq:latest
+      container_name: brk_fe_rabbitmq
+      labels:
+        - "com.docker.compose.task.name=brk_fe_rabbitmq"
+      deploy:
+        restart_policy:
+          condition: on-failure
+###<BRK_NETWORK_DEF>
+
+###service
+    swarmer:
+      image: m0bius/swarmer:latest
+      container_name: swarmer
+      depends_on:
+        - brk_fe_rabbitmq
+      labels:
+        - "com.docker.compose.task.name=swarmer"
+      entrypoint:
+        - /bin/bash
+        - /home/wait-for-it.sh
+        - brk_fe_rabbitmq:5672
+        - -t
+        - "0"
+        - --
+        - /bin/bash
+        - /exec.sh
+      volumes:
+        - K:CITY_ROOT/config/swarmer-src:/home
+        # access to docker engine's API
+        - /var/run/docker.sock:/var/run/docker.sock
+      deploy:
+        restart_policy:
+          condition: on-failure
+      networks:
+        default:
+
+###service
+    fe_data:
+      image: 127.0.0.1:5000/fe_data
+      build: ./data
+      container_name: fe_data
+      volumes:
+        - K:CITY_ROOT/app/frontend:/home/cds
+
+###service
+    fe:
+      image: 127.0.0.1:5000/fe
+      build: ./fe
+      container_name: fe
+      depends_on:
+        - brk_fe_rabbitmq
+        - fe_data
+      volumes:
+        - K:CITY_ROOT/app/frontend:/home/cds
+        # access to docker engine's API
+        - /var/run/docker.sock:/var/run/docker.sock
+      deploy:
+        restart_policy:
+          condition: on-failure
+      working_dir: /home/cds
+      environment:
+        - MIX_ENV=fe.TEMPLATE.MIX
+        - CITY_ROOT=/home/cds
+      entrypoint:
+        - /bin/bash
+        - /home/cds/wait-for-it.sh
+        - brk_fe_rabbitmq:5672
+        - -t
+        - "0"
+        - --
+        - /bin/bash
+        - /home/cds/exec.sh
+      ports:
+        - target: 4000
+          published: 4005
+          protocol: tcp
+          mode: host

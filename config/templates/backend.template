@@ -1,0 +1,43 @@
+#===============================================================================
+# Deploys the macro-component
+# Backend (backend)
+# - it represents the concurrent part of backend, i.e. the application
+#*******************************************************************************
+# NOTE:
+# for variable substitution in KEYS definition check
+# https://github.com/docker/compose/issues/3998
+# It is ONLY supported using default docker enviroment variables
+##******************************************************************************
+###<INTEGRATION>
+version: '3.3'
+services:
+
+###service
+    backend_data:
+      image: 127.0.0.1:5000/backend_data
+      build: ./data
+      container_name: backend_data
+      volumes:
+        - K:CITY_ROOT/app/backend:/home/cds/backend
+###<DISTRICT_BE>
+###service
+    backend:
+      image: 127.0.0.1:5000/backend
+      build: ./backend
+      container_name: backend
+      depends_on:
+        - backend_data
+        - mw
+      volumes:
+        - K:CITY_ROOT/app/backend:/home/cds/backend
+        # access to docker engine's API
+        - /var/run/docker.sock:/var/run/docker.sock
+      deploy:
+        mode: replicated
+        replicas: 1
+        restart_policy:
+          condition: on-failure
+      ###networks:
+        ###<NETWORK_NAME>:
+      working_dir: /home/cds/backend
+###</DISTRICT_BE>

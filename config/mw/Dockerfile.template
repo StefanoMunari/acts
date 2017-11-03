@@ -1,0 +1,34 @@
+################################################################################
+# Provide an image for the middleware component
+################################################################################
+########@see mw_introspect
+FROM m0bius/city-mw-introspect:latest
+
+########ENVIROMENT
+ENV TERM xterm
+ENV DATA_PATH /home/cds
+ENV CITY_ROOT /home/cds/mw
+
+########PACKAGES
+RUN DEBIAN_FRONTEND=noninteractive apt-get update &&\
+   apt-get upgrade -y
+
+########LOCAL FILES
+ADD resolv.conf /etc/
+RUN chmod 644 /etc/resolv.conf
+# <DEV_MODE>
+ADD loop.sh /tmp/
+# </DEV_MODE>
+
+########MISC
+# <DEV_MODE>
+RUN chmod +x /tmp/loop.sh
+# </DEV_MODE>
+WORKDIR $DATA_PATH
+
+# <DEV_MODE>
+ENTRYPOINT ["sh","/tmp/loop.sh","&"]
+# </DEV_MODE>
+
+########EXPOSE PORTS (solve problems in swarm mode - ignore ports)
+EXPOSE 8081

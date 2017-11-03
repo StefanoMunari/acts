@@ -1,0 +1,49 @@
+######## Configure: ############################################################
+# - the Ada enviroment
+# - the prooject environment
+## Linking:
+## => dynamically linked
+# -AUnit : a test framework for Ada
+# -GNATCOLL : a library with several plugins for Ada (e.g. JSON)
+# -JSONCpp : a JSON C++ parser
+################################################################################
+# @see backend_introspect
+FROM m0bius/city-be-introspect:latest
+
+########ENVIROMENT
+# AUnit path
+ENV ADA_AUNIT_PATH=/usr/share/ada/adainclude
+# User
+ENV TERM xterm
+ENV CITY_ROOT /home/cds/backend
+ENV CITY_CONFIG /home/cds/backend/config
+ENV ADA_PROJECT_ROOT /home/cds/backend
+ENV CITY_PATH_FINDER /home/cds/backend/path-finder
+ENV PATH_FINDER_ROOT /home/cds/backend/path-finder
+
+########LOCAL FILES
+# <DEV_MODE>
+ADD loop.sh /tmp/
+# </DEV_MODE>
+ADD compile.sh /tmp/
+
+########MISC
+# <DEV_MODE>
+RUN chmod +x /tmp/loop.sh
+# </DEV_MODE>
+RUN useradd -m -p cds cds
+WORKDIR $CITY_ROOT
+
+########CONTAINER_ENTRYPOINT
+# <DEV_MODE>
+ENTRYPOINT ["sh","/tmp/loop.sh","&"]
+# </DEV_MODE>
+# <PROD_MODE>
+ENTRYPOINT ["make","P=init"]
+# </PROD_MODE>
+# <TEST_MODE>
+ENTRYPOINT ["make","clean","test","run_all_tests","P=test","F=backend"]
+# </TEST_MODE>
+
+########EXPOSE PORTS (solve problems in swarm mode - ignore ports)
+EXPOSE 8082

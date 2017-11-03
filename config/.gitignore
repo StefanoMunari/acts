@@ -1,0 +1,11 @@
+# template-generated files
+docker-compose.*
+fe/Dockerfile
+fe_postgres/init-user-db.sh
+backend/Dockefile
+mw/Dockerfile
+templates/backend-mw.template
+templates/backend-mw-fe.template
+*.bak
+**/**/swarmer.services.json
+swarmer-src/state.txt

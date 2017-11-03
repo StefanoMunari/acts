@@ -1,0 +1,100 @@
+#===============================================================================
+# Deploys the macro-component
+# Middleware (mw)
+# - it represents the distributed part of the backend
+# @see backend.template
+#*******************************************************************************
+# NOTE:
+# for variable substitution in KEYS definition check
+# https://github.com/docker/compose/issues/3998
+# It is ONLY supported using default docker enviroment variables
+##******************************************************************************
+version: '3.3'
+services:
+###<INTEGRATION>
+
+###service
+    broker_data:
+      image: 127.0.0.1:5000/broker_data
+      build: ./data
+      container_name: broker_data
+      volumes:
+        - K:CITY_ROOT/broker_to_as:/home/cds/broker
+
+###service
+    broker:
+      image: 127.0.0.1:5000/broker
+      build: ./mw
+      container_name: broker
+      environment:
+        # override the default CITY_ROOT
+        - CITY_ROOT=/home/cds/broker
+        - MIX_ENV=mw.TEMPLATE.MIX
+      depends_on:
+        - mw_brk_rabbitmq
+      volumes:
+        - K:CITY_ROOT/broker_to_as:/home/cds/broker
+        # access to docker engine's API
+        - /var/run/docker.sock:/var/run/docker.sock
+      deploy:
+        restart_policy:
+          condition: on-failure
+      ###networks:
+        ###<NETWORK_NAME>:
+      working_dir: /home/cds/broker
+      entrypoint:
+        - ./exec.sh
+
+###service
+    mw_brk_rabbitmq:
+      image: rabbitmq:latest
+      container_name: mw_brk_rabbitmq
+      deploy:
+        restart_policy:
+          condition: on-failure
+
+###service
+    mw_data:
+      image: 127.0.0.1:5000/mw_data
+      build: ./data
+      container_name: mw_data
+      volumes:
+        - K:CITY_ROOT/mw:/home/cds/mw
+
+###<DISTRICT_MW>
+###service
+    redis:
+      image: redis:latest
+      container_name: redis
+      deploy:
+        mode: replicated
+        replicas: 1
+        restart_policy:
+          condition: on-failure
+
+###service
+    mw:
+      image: 127.0.0.1:5000/mw
+      build: ./mw
+      container_name: mw
+      environment:
+        - MIX_ENV=mw.TEMPLATE.MIX
+      depends_on:
+        - mw_data
+        - mw_brk_rabbitmq
+        - redis
+      volumes:
+        - K:CITY_ROOT/mw:/home/cds/mw
+        # to access docker engine's API
+        - /var/run/docker.sock:/var/run/docker.sock
+      deploy:
+        mode: replicated
+        replicas: 1
+        restart_policy:
+          condition: on-failure
+      ###networks:
+        ###<NETWORK_NAME>:
+      working_dir: /home/cds/mw
+      entrypoint:
+        - ./exec.sh
+###</DISTRICT_MW>

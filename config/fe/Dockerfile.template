@@ -1,0 +1,50 @@
+################################################################################
+# Provide an image for the Frontend component:
+# - will contain the viewer
+# - will contain the application server
+# the following deps are installed:
+# - nodejs-v6
+# - npm
+# - curl
+################################################################################
+# elixir-base image
+FROM elixir:latest
+
+########ENVIROMENT
+ENV TERM xterm
+ENV DATA_PATH /home/cds
+ENV CITY_ROOT /home/cds
+########DNS
+ADD resolv.conf /etc/
+RUN chmod 644 /etc/resolv.conf
+
+########PACKAGES
+RUN DEBIAN_FRONTEND=noninteractive apt-get update &&\
+   apt-get upgrade -y
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+   curl \
+   build-essential
+
+########DEPS
+## NODEJS
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+  apt-get update && apt-get install -y nodejs && \
+  npm install npm@latest -g
+
+########LOCAL FILES
+# <DEV_MODE>
+ADD loop.sh /tmp/
+# </DEV_MODE>
+########MISC
+# <DEV_MODE>
+RUN chmod +x /tmp/loop.sh
+# </DEV_MODE>
+WORKDIR $DATA_PATH
+
+# <DEV_MODE>
+ENTRYPOINT ["sh","/tmp/loop.sh","&"]
+# </DEV_MODE>
+
+########EXPOSE PORTS (solve problems in swarm mode - ignore ports)
+EXPOSE 4000

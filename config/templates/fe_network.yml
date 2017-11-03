@@ -1,0 +1,12 @@
+      networks:
+        bridge:
+          ipv4_address: 10.5.0.1
+        default:
+networks:
+  default:
+  bridge:
+    external: true
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+###<BRK_NETWORK_DECL>

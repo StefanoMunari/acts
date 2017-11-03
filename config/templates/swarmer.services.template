@@ -1,0 +1,9 @@
+{
+"services":
+[
+"mw",
+"backend",
+"broker",
+"mw_brk_rabbitmq",
+"redis"],
+"no_cities":
