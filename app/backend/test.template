@@ -1,0 +1,13 @@
+with "aunit";
+with "gnatcoll";
+
+project Test is
+    for Source_Dirs use ("./test/**","./src/**");
+    for Object_Dir use "obj";
+    for Main use (<MAIN_TEMPLATE>);
+    for Exec_Dir use "bin/test/";
+
+    package Builder is
+      <BUILDER_TEMPLATE>
+    end Builder;
+end Test;
