@@ -1,0 +1,13 @@
+<div>
+    <h1 class="mat-title">Travellers</h1>
+    <mat-list>
+        <mat-list-item *ngFor="let traveller of travellers">
+            <a mat-raised-button
+               [routerLink]="['/travellers', traveller.getId()]" [queryParams]="{ sourceCity: cityId, sourceDistrict: districtId }">
+                <span class="definitionTitle mat-subheading-2">
+                <span [innerHTML]="traveller.getId()"></span>
+            </span>
+            </a>
+        </mat-list-item>
+    </mat-list>
+</div>

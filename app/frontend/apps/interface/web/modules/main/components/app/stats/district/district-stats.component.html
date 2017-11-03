@@ -1,0 +1,11 @@
+<div>
+    <h1 class="mat-title">Statistics</h1>
+    <mat-list>
+        <mat-list-item *ngFor="let stat of stats">
+            <span class="definitionTitle mat-subheading-1">
+                <span [innerHTML]="stat.label"></span>:
+                <span [innerHTML]="stat.value"></span>
+            </span>
+        </mat-list-item>
+    </mat-list>
+</div>

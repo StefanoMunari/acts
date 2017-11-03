@@ -1,0 +1,47 @@
+<div id="mainContainer">
+  <div id="header">
+    <mat-toolbar>
+      <span class="mat-headline">City traffic simulator</span>
+    </mat-toolbar>
+  </div>
+  <div id="canvas" class="container">
+    <div *ngIf="!!cities && cities.length > 0" class="cities">
+      <span class="mat-title title">Cities</span>
+      <div *ngFor="let city of cities">
+        <mat-expansion-panel
+          *ngIf="!!city.districts && city.districts.length > 0"
+          [style.background-color]="city.color">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{city.name}}
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field *ngFor="let district of cities[city.id].districts">
+            <div class="button-row district-buttons">
+              <a mat-raised-button
+                routerLink="/cities/{{city.id}}/districts/{{district.id}}"
+                [style.background-color]="city.lColor"
+              >
+                {{district.name}}
+                <br />
+                <span class="mat-body-3 districtInfo">
+                Streets: {{district.streets}}
+                </span>
+                <br />
+                <span class="mat-body-3 districtInfo">
+                Travellers: {{district.travellers}}
+                </span>
+              </a>
+            </div>
+          </mat-form-field>
+        </mat-expansion-panel>
+      </div>
+    </div>
+    <div *ngIf="!cities || cities.length === 0" class="message">
+      <span class="mat-body-2">No districts found!</span>
+    </div>
+  </div>
+</div>

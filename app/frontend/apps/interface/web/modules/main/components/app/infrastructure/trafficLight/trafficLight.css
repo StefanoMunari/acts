@@ -1,0 +1,32 @@
+.trafficLight .greenLight,
+.trafficLight .yellowLight,
+.trafficLight .redLight {
+  fill: none
+}
+
+.trafficLight.go .greenLight {
+  fill: #00C851
+}
+
+.trafficLight.slowDown .yellowLight {
+  fill: #ffd600
+}
+
+.trafficLight.stop .redLight {
+  fill: #ff4444
+}
+
+.trafficLight.go .redLight,
+.trafficLight.go .yellowLight {
+  fill: none
+}
+
+.trafficLight.slowDown .redLight,
+.trafficLight.slowDown .greenLight {
+  fill: none
+}
+
+.trafficLight.stop .greenLight,
+.trafficLight.stop .yellowLight {
+  fill: none
+}

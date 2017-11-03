@@ -1,0 +1,9 @@
+<mat-card class="legend">
+    <h1 class="title">Travellers legend:</h1>
+    <div *ngFor="let item of items" class="item">
+        <mat-card class="color-cell"
+             [ngStyle]="{'background-color': getRgbFromColor(item[1])}">
+        </mat-card>
+        <span [innerHTML]="item[0]"></span>
+    </div>
+</mat-card>

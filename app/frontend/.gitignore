@@ -1,0 +1,7 @@
+_build
+deps
+.idea
+bower_components
+
+etc/*
+libs/

@@ -1,0 +1,17 @@
+.district-sidenav-container {
+  position: absolute;
+  top: 64px;
+  bottom: 0px;
+  width: 100%;
+}
+
+.district-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.district-sidenav {
+  padding: 20px;
+}

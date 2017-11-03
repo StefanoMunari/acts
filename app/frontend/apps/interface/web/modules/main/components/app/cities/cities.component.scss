@@ -1,0 +1,62 @@
+#mainContainer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+#header {
+  width: 100%;
+  height: 64px;
+
+  span {
+    margin: auto;
+  }
+}
+
+#canvas {
+  position: absolute;
+  top: 64px;
+  bottom: 0px;
+  width: 100%;
+
+  .cities {
+    margin: 10px auto;
+    left: 0;
+    right: 0;
+
+    .title {
+      margin: 20px;
+      text-align: left;
+      height: 50px;
+    }
+
+    .district-buttons {
+      display: inline-block;
+      text-align: center;
+
+      a {
+        margin: 5px;
+        padding: 5px;
+      }
+    }
+  }
+
+  .message, .message span{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 5px;
+  }
+}
+
+.districtInfo{
+  font-weight:normal;
+  font-style: italic;
+}

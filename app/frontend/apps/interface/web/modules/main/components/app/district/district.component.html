@@ -1,0 +1,40 @@
+<div id="mainContainer">
+  <div id="header">
+    <mat-toolbar>
+      <a routerLink="/dashboard" mat-icon-button>
+        <mat-icon>home</mat-icon>
+      </a>
+      <span class="mat-headline">{{districtName}}</span>
+    </mat-toolbar>
+  </div>
+  <mat-sidenav-container class="district-sidenav-container">
+    <mat-sidenav #statsSidenav position="start" class="district-sidenav">
+      <district-stats [stats]="travellerRegistry.getStats()">
+      </district-stats>
+    </mat-sidenav>
+
+    <mat-sidenav #pursueSidenav position="end" class="district-sidenav">
+      <district-travellers [travellers]="travellerRegistry.findAllTravellers()"
+                           [city-id]="cityId"
+                           [district-id]="districtId">
+      </district-travellers>
+    </mat-sidenav>
+
+    <div id="canvas" class="container district-sidenav-content">
+      <button mat-fab class="sidenavOpen stats button"
+              type="button" color="primary" (click)="statsSidenav.open()">
+        Stats
+      </button>
+      <!--button *ngIf="travellerRegistry.countTravellers() > 0" mat-fab class="sidenavOpen pursue button"
+              type="button" color="accent" (click)="pursueSidenav.open()">
+        Pursue
+      </button-->
+      <infrastructure-drawer></infrastructure-drawer>
+      <traveller-drawer></traveller-drawer>
+      <facilities-stats></facilities-stats>
+      <colors-legend-component class="legend"
+                               [items]="travellerRegistry.getTravellerColors()">
+      </colors-legend-component>
+    </div>
+  </mat-sidenav-container>
+</div>

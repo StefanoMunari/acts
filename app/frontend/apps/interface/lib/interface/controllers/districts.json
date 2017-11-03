@@ -1,0 +1,64 @@
+{
+  "districts": [
+    {
+      "id": "1",
+      "name": "Schosp Plaza",
+      "travellers": 102,
+      "streets": 24
+    },
+    {
+      "id": "4",
+      "name": "Upper South Shrartheom",
+      "travellers": 106,
+      "streets": 35
+    },
+    {
+      "id": "8",
+      "name": "Shum",
+      "travellers": 80,
+      "streets": 75
+    },
+    {
+      "id": "10",
+      "name": "Lower North Glurvolp",
+      "travellers": 78,
+      "streets": 53
+    },
+    {
+      "id": "11",
+      "name": "Yames Road",
+      "travellers": 200,
+      "streets": 94
+    },
+    {
+      "id": "14",
+      "name": "Bunnood Valley",
+      "travellers": 76,
+      "streets": 63
+    },
+    {
+      "id": "24",
+      "name": "Limmopt Town",
+      "travellers": 40,
+      "streets": 26
+    },
+    {
+      "id": "26",
+      "name": "Tannug Side",
+      "travellers": 99,
+      "streets": 83
+    },
+    {
+      "id": "29",
+      "name": "Sneesseswac East",
+      "travellers": 64,
+      "streets": 50
+    },
+    {
+      "id": "40",
+      "name": "Yippeovosp Park",
+      "travellers": 80,
+      "streets": 38
+    }
+  ]
+}

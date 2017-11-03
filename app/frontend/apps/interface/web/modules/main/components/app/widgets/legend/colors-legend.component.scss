@@ -1,0 +1,22 @@
+.legend {
+    opacity: 0.7;
+
+    .title {
+        width: 100%;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .color-cell {
+        padding: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
+        border-radius: 25px;
+        float: left;
+    }
+
+    .item {
+        display: inline-block;
+        margin: auto 5px;
+    }
+}

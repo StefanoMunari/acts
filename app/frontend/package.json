@@ -1,0 +1,29 @@
+{
+  "name": "peap",
+  "version": "2.0.0",
+  "description": "A poc implementation of Phoenix Elixir Angular Postgres and few other things.",
+  "scripts": {
+    "test-e2e": "bin/run_e2e_tests.sh",
+    "test": "bin/run_tests.sh",
+    "start": "mix phoenix.server",
+    "install": "bin/install.sh"
+  },
+  "author": "Adam Keating",
+  "license": "MIT",
+  "dependencies": {
+    "cpx": "^1.5.0",
+    "jquery": "^3.2.1",
+    "svg-pan-zoom": "github:ariutta/svg-pan-zoom",
+    "svg.js": "^2.6.3",
+    "tooltipster": "^4.2.5",
+    "webpack": "^2.1.0-beta.22"
+  },
+  "devDependencies": {
+    "@angular/common": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/router": "^5.0.0",
+    "awesome-typescript-loader": "^3.3.0",
+    "phoenix": "^1.3.0",
+    "typescript": "^2.6.1"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "peap",
+  "description": "A poc implementation of Phoenix Elixir Angular Postgres and few other things.",
+  "main": "",
+  "authors": [
+    "Adam Keating"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "svg.screenbbox.js": "^0.1.2"
+  }
+}
