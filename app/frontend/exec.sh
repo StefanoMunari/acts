@@ -1,6 +1,17 @@
 #!/bin/bash
 
+cd $CITY_ROOT/apps/interface
+npm i -g webpack
+npm i -g cpx
+npm i -g svg-pan-zoom
+npm i -g awesome-typescript-loader
+cd $CITY_ROOT
+npm install --save-dev webpack
+npm install --save-dev cpx
+npm install --save-dev svg-pan-zoom
+npm install --save-dev awesome-typescript-loader
 npm install -g --force --unsafe-perm
+
 mix local.hex  --force
 mix local.rebar  --force
 mix deps.get
@@ -15,7 +26,6 @@ elif [ "$MIX_ENV" == "test" ]; then
 elif [ "$MIX_ENV" == "dev" ]; then
   # # install postgres client
   apt-get install postgresql-client -y
-  mix compile
   # do nothing
    echo "STATE:READY"
    echo "Usage: "
