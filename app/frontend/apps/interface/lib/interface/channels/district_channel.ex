@@ -3,6 +3,17 @@ defmodule Interface.DistrictChannel do
 
   alias Interface.OutputStream.CityManager, as: OutputToDistrict
 
+  intercept [
+    "tread",
+    "exit_district",
+    "enter_building",
+    "exit_building",
+    "change_color_tl",
+    "enter_bus",
+    "exit_bus",
+    "shutdown"
+  ]
+
   def join("district:" <> district_id, _message, socket) do
     Interface.Endpoint.subscribe "district:#{district_id}"
     IO.inspect "Subscribing #{inspect socket} to district:#{district_id}..."
