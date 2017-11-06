@@ -83,6 +83,20 @@ package body Active.Traveller.Utils.Mock is
       return This.Return_Values.Traveller_Ref_Speed.Get_Current_Speed;
    end Get_Current_Speed;
 
+   function Get_Travel_Source (This         : in     Mock.Object;
+                                    Traveller_Id : in     Agent.Agent_Id)
+      return Slice.Map is
+    begin
+      if not This.Return_Values.Get_Travel_Source.Contains (Traveller_Id)
+      then
+         Raise_Missing_Return_Value_For_Mocked_Procedure_Exception (
+            Procedure_Name => "Get_Travel_Source",
+            Package_Name   => "Active.Traveller.Utils.Mock");
+      end if;
+
+      return This.Return_Values.Get_Travel_Source.Element (Traveller_Id);
+    end Get_Travel_Source;
+
    function Get_Travel_Destination (This         : in     Mock.Object;
                                     Traveller_Id : in     Agent.Agent_Id)
       return Slice.Map is
@@ -189,6 +203,17 @@ package body Active.Traveller.Utils.Mock is
       This.Return_Values.Traveller_Ref_Speed := Traveller_Ref;
       This.Return_Values.Traveller_Ref_Speed_Existence := TRUE;
      end Set_Traveller_For_Set_Current_Speed;
+
+   procedure Set_Return_Value_For_Get_Travel_Source (
+      This         : in out Traveller.Utils.Mock.Object;
+      Traveller_Id : in     Agent.Agent_Id;
+      Source       : in     Slice.Map)
+   is
+   begin
+      This.Return_Values.Get_Travel_Source.Include (
+         Key      => Traveller_Id,
+         New_Item => Source);
+   end Set_Return_Value_For_Get_Travel_Source;
 
    procedure Set_Return_Value_For_Get_Travel_Destination (
       This         : in out Traveller.Utils.Mock.Object;

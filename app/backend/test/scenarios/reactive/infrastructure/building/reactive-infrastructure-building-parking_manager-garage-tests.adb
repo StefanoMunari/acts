@@ -82,6 +82,7 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
       Traveller_Id : Agent.Agent_Id := Agent.Create_Id_From_Natural (442);
       Traveller_Utils_Mock_Ref : Traveller_Utils_Mock.Reference
          := Traveller_Utils_Mock.Reference (T.Traveller_Utils);
+      Source_Slice : Slice.Map := Slice.Empty_Map;
       Destination_Slice : Slice.Map := Slice.Empty_Map;
       Destination_List : Infra_Id_List.List := Infra_Id_List.Empty_List;
       Destination_Id : Infra_Id := 1;
@@ -90,6 +91,8 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
       Boarded   : Boolean;
    begin
       Destination_List.Append (Destination_Id);
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller_Id, Source_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
          Traveller_Id, Destination_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_List_From_Slice (
@@ -107,22 +110,30 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
       Traveller_Id : Agent.Agent_Id := Agent.Create_Id_From_Natural (442);
       Traveller_Utils_Mock_Ref : Traveller_Utils_Mock.Reference
          := Traveller_Utils_Mock.Reference (T.Traveller_Utils);
-      --Stub_Mock_Ref : Remote_Stub_Mock.Reference
-      --   := Remote_Stub_Mock.Reference (T.Stub);
+      Source_Slice : Slice.Map := Slice.Empty_Map;
+      Source_List  : Infra_Id_List.List := Infra_Id_List.Empty_List;
+      Source_Id    : Infra_Id := 2;
       Destination_Slice : Slice.Map := Slice.Empty_Map;
-      Destination_List : Infra_Id_List.List := Infra_Id_List.Empty_List;
-      Destination_Id : Infra_Id := 1;
+      Destination_List  : Infra_Id_List.List := Infra_Id_List.Empty_List;
+      Destination_Id    : Infra_Id := 1;
       -- out variables
       Result_Id : Agent.Agent_Id;
       Boarded   : Boolean;
    begin
       T.Garage_Ref.Set_Size (1);
 
+      Source_List.Append (Source_Id);
+      Source_Slice.Include (FOOT, Source_List);
+      Source_Slice.Include (BIKE, Infra_Id_List.Empty_List);
+      Source_Slice.Include (ROAD, Infra_Id_List.Empty_List);
+
       Destination_List.Append (Destination_Id);
       Destination_Slice.Include (FOOT, Destination_List);
       Destination_Slice.Include (BIKE, Infra_Id_List.Empty_List);
       Destination_Slice.Include (ROAD, Infra_Id_List.Empty_List);
 
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller_Id, Source_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
          Traveller_Id, Destination_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_List_From_Slice (
@@ -155,6 +166,9 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
          := Traveller_Utils_Mock.Reference (T.Traveller_Utils);
       PC_Utils_Ref : People_Carrier_Mock.Reference
          := People_Carrier_Mock.Reference (T.PC_Utils);
+      Source_Slice : Slice.Map := Slice.Empty_Map;
+      Source_List  : Infra_Id_List.List := Infra_Id_List.Empty_List;
+      Source_Id    : Infra_Id := 2;
       Destination_Slice : Slice.Map := Slice.Empty_Map;
       Destination_List : Infra_Id_List.List := Infra_Id_List.Empty_List;
       Destination_Id : Infra_Id := 1;
@@ -165,11 +179,20 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
    begin
       T.Garage_Ref.Set_Size (2);
 
+      Source_List.Append (Source_Id);
+      Source_Slice.Include (FOOT, Source_List);
+      Source_Slice.Include (BIKE, Infra_Id_List.Empty_List);
+      Source_Slice.Include (ROAD, Infra_Id_List.Empty_List);
+
       Destination_List.Append (Destination_Id);
       Destination_Slice.Include (FOOT, Destination_List);
       Destination_Slice.Include (BIKE, Infra_Id_List.Empty_List);
       Destination_Slice.Include (ROAD, Infra_Id_List.Empty_List);
 
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller1_Id, Source_Slice);
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller2_Id, Source_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
          Vehicle1_Id, Destination_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
@@ -225,8 +248,9 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
          := Traveller_Utils_Mock.Reference (T.Traveller_Utils);
       PC_Utils_Ref : People_Carrier_Mock.Reference
          := People_Carrier_Mock.Reference (T.PC_Utils);
-      --Stub_Mock_Ref : Remote_Stub_Mock.Reference
-      --   := Remote_Stub_Mock.Reference (T.Stub);
+      Source_Slice : Slice.Map := Slice.Empty_Map;
+      Source_List  : Infra_Id_List.List := Infra_Id_List.Empty_List;
+      Source_Id    : Infra_Id := 2;
       Destination_Slice : Slice.Map := Slice.Empty_Map;
       Destination_List : Infra_Id_List.List := Infra_Id_List.Empty_List;
       Destination_Id : Infra_Id := 1;
@@ -237,11 +261,20 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
    begin
       T.Garage_Ref.Set_Size (2);
 
+      Source_List.Append (Source_Id);
+      Source_Slice.Include (FOOT, Source_List);
+      Source_Slice.Include (BIKE, Infra_Id_List.Empty_List);
+      Source_Slice.Include (ROAD, Infra_Id_List.Empty_List);
+
       Destination_List.Append (Destination_Id);
       Destination_Slice.Include (FOOT, Destination_List);
       Destination_Slice.Include (BIKE, Infra_Id_List.Empty_List);
       Destination_Slice.Include (ROAD, Infra_Id_List.Empty_List);
 
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller1_Id, Source_Slice);
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller2_Id, Source_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
          Vehicle1_Id, Destination_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
@@ -299,8 +332,12 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
          := Traveller_Utils_Mock.Reference (T.Traveller_Utils);
       PC_Utils_Ref       : People_Carrier_Mock.Reference
          := People_Carrier_Mock.Reference (T.PC_Utils);
-      --Stub_Mock_Ref      : Remote_Stub_Mock.Reference
-      --   := Remote_Stub_Mock.Reference (T.Stub);
+      Source1_Slice : Slice.Map := Slice.Empty_Map;
+      Source1_List  : Infra_Id_List.List := Infra_Id_List.Empty_List;
+      Source1_Id    : Infra_Id := 3;
+      Source2_Slice : Slice.Map := Slice.Empty_Map;
+      Source2_List  : Infra_Id_List.List := Infra_Id_List.Empty_List;
+      Source2_Id    : Infra_Id := 4;
       Destination1_Slice : Slice.Map := Slice.Empty_Map;
       Destination1_List  : Infra_Id_List.List := Infra_Id_List.Empty_List;
       Destination1_Id    : Infra_Id := 1;
@@ -313,6 +350,16 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
       Boarded    : Boolean;
    begin
       T.Garage_Ref.Set_Size (2);
+
+      Source1_List.Append (Source1_Id);
+      Source1_Slice.Include (FOOT, Source1_List);
+      Source1_Slice.Include (BIKE, Infra_Id_List.Empty_List);
+      Source1_Slice.Include (ROAD, Infra_Id_List.Empty_List);
+
+      Source2_List.Append (Source2_Id);
+      Source2_Slice.Include (FOOT, Source2_List);
+      Source2_Slice.Include (BIKE, Infra_Id_List.Empty_List);
+      Source2_Slice.Include (ROAD, Infra_Id_List.Empty_List);
 
       Destination1_List.Append (Destination1_Id);
       Destination1_Slice.Include (FOOT, Destination1_List);
@@ -328,6 +375,10 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
       Ass.Assert (Destination1_List /= Destination2_List,
                  "The two lists are equal");
 
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller1_Id, Source1_Slice);
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller2_Id, Source2_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
          Vehicle1_Id, Destination1_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
@@ -378,8 +429,12 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
          := Traveller_Utils_Mock.Reference (T.Traveller_Utils);
       PC_Utils_Ref : People_Carrier_Mock.Reference
          := People_Carrier_Mock.Reference (T.PC_Utils);
-      --Stub_Mock_Ref : Remote_Stub_Mock.Reference
-      --   := Remote_Stub_Mock.Reference (T.Stub);
+      Source1_Slice : Slice.Map := Slice.Empty_Map;
+      Source1_List  : Infra_Id_List.List := Infra_Id_List.Empty_List;
+      Source1_Id    : Infra_Id := 3;
+      Source2_Slice : Slice.Map := Slice.Empty_Map;
+      Source2_List  : Infra_Id_List.List := Infra_Id_List.Empty_List;
+      Source2_Id    : Infra_Id := 4;
       Destination1_Slice : Slice.Map := Slice.Empty_Map;
       Destination1_List : Infra_Id_List.List := Infra_Id_List.Empty_List;
       Destination1_Id : Infra_Id := 1;
@@ -392,6 +447,16 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
       Boarded   : Boolean;
    begin
       T.Garage_Ref.Set_Size (1);
+
+      Source1_List.Append (Source1_Id);
+      Source1_Slice.Include (FOOT, Source1_List);
+      Source1_Slice.Include (BIKE, Infra_Id_List.Empty_List);
+      Source1_Slice.Include (ROAD, Infra_Id_List.Empty_List);
+
+      Source2_List.Append (Source2_Id);
+      Source2_Slice.Include (FOOT, Source2_List);
+      Source2_Slice.Include (BIKE, Infra_Id_List.Empty_List);
+      Source2_Slice.Include (ROAD, Infra_Id_List.Empty_List);
 
       Destination1_List.Append (Destination1_Id);
       Destination1_Slice.Include (FOOT, Destination1_List);
@@ -406,6 +471,10 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
       Ass.Assert (Destination1_List /= Destination2_List,
                  "The two lists are equal");
 
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller1_Id, Source1_Slice);
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller2_Id, Source2_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
          Vehicle_Id, Destination1_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
@@ -462,8 +531,9 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
       Traveller_Id      : Agent.Agent_Id := Agent.Create_Id_From_Natural (442);
       Traveller_Utils_Mock_Ref : Traveller_Utils_Mock.Reference
          := Traveller_Utils_Mock.Reference (T.Traveller_Utils);
-      --Stub_Mock_Ref     : Remote_Stub_Mock.Reference
-      --   := Remote_Stub_Mock.Reference (T.Stub);
+      Source_Slice : Slice.Map := Slice.Empty_Map;
+      Source_List  : Infra_Id_List.List := Infra_Id_List.Empty_List;
+      Source_Id    : Infra_Id := 2;
       Destination_Slice : Slice.Map := Slice.Empty_Map;
       Destination_List  : Infra_Id_List.List := Infra_Id_List.Empty_List;
       Destination_Id    : Infra_Id := 1;
@@ -474,11 +544,18 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
    begin
       T.Garage_Ref.Set_Size (1);
 
+      Source_List.Append (Source_Id);
+      Source_Slice.Include (FOOT, Source_List);
+      Source_Slice.Include (BIKE, Infra_Id_List.Empty_List);
+      Source_Slice.Include (ROAD, Infra_Id_List.Empty_List);
+
       Destination_List.Append (Destination_Id);
       Destination_Slice.Include (FOOT, Destination_List);
       Destination_Slice.Include (BIKE, Infra_Id_List.Empty_List);
       Destination_Slice.Include (ROAD, Infra_Id_List.Empty_List);
 
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller_Id, Source_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
          Traveller_Id, Destination_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_List_From_Slice (
@@ -519,8 +596,9 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
          := Traveller_Utils_Mock.Reference (T.Traveller_Utils);
       PC_Utils_Ref : People_Carrier_Mock.Reference
          := People_Carrier_Mock.Reference (T.PC_Utils);
-      --Stub_Mock_Ref : Remote_Stub_Mock.Reference
-      --   := Remote_Stub_Mock.Reference (T.Stub);
+      Source_Slice : Slice.Map := Slice.Empty_Map;
+      Source_List  : Infra_Id_List.List := Infra_Id_List.Empty_List;
+      Source_Id    : Infra_Id := 2;
       Destination_Slice : Slice.Map := Slice.Empty_Map;
       Destination_List : Infra_Id_List.List := Infra_Id_List.Empty_List;
       Destination_Id : Infra_Id := 1;
@@ -533,6 +611,11 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
    begin
       T.Garage_Ref.Set_Size (2);
 
+      Source_List.Append (Source_Id);
+      Source_Slice.Include (FOOT, Source_List);
+      Source_Slice.Include (BIKE, Infra_Id_List.Empty_List);
+      Source_Slice.Include (ROAD, Infra_Id_List.Empty_List);
+
       Destination_List.Append (Destination_Id);
       Destination_Slice.Include (FOOT, Destination_List);
       Destination_Slice.Include (BIKE, Infra_Id_List.Empty_List);
@@ -540,12 +623,16 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
 
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
          Vehicle1_Id, Destination_Slice);
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller1_Id, Source_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
          Traveller1_Id, Destination_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
          Vehicle2_Id, Destination_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
          Traveller2_Id, Destination_Slice);
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller2_Id, Source_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_List_From_Slice (
          Destination_List);
 
@@ -602,8 +689,9 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
       Traveller_Id : Agent.Agent_Id := Agent.Create_Id_From_Natural (442);
       Traveller_Utils_Mock_Ref : Traveller_Utils_Mock.Reference
          := Traveller_Utils_Mock.Reference (T.Traveller_Utils);
-      --Stub_Mock_Ref : Remote_Stub_Mock.Reference
-      --   := Remote_Stub_Mock.Reference (T.Stub);
+      Source_Slice : Slice.Map := Slice.Empty_Map;
+      Source_List  : Infra_Id_List.List := Infra_Id_List.Empty_List;
+      Source_Id    : Infra_Id := 2;
       Destination_Slice : Slice.Map := Slice.Empty_Map;
       Destination_List : Infra_Id_List.List := Infra_Id_List.Empty_List;
       Destination_Id : Infra_Id := 1;
@@ -614,16 +702,22 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage.Tests is
    begin
       T.Garage_Ref.Set_Size (1);
 
+      Source_List.Append (Source_Id);
+      Source_Slice.Include (FOOT, Source_List);
+      Source_Slice.Include (BIKE, Infra_Id_List.Empty_List);
+      Source_Slice.Include (ROAD, Infra_Id_List.Empty_List);
+
       Destination_List.Append (Destination_Id);
       Destination_Slice.Include (FOOT, Destination_List);
       Destination_Slice.Include (BIKE, Infra_Id_List.Empty_List);
       Destination_Slice.Include (ROAD, Infra_Id_List.Empty_List);
 
+      Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Source (
+         Traveller_Id, Source_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_Travel_Destination (
          Traveller_Id, Destination_Slice);
       Traveller_Utils_Mock_Ref.Set_Return_Value_For_Get_List_From_Slice (
          Destination_List);
-      --Stub_Mock_Ref.Set_Return_Value_For_Query (True);
 
       T.Garage_Ref.Park_Vehicle (Vehicle_Id);
 

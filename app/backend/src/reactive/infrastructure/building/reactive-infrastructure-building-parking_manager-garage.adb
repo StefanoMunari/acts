@@ -1,11 +1,15 @@
 with Ada.Strings.Unbounded;
 
+with Active.Travel;
+with Active.Travel.Travel_Planning;
+
 with Shared.Infra_Id_List;
 with Shared.Slice;
 
 package body Reactive.Infrastructure.Building.Parking_Manager.Garage is
 
    package SU            renames Ada.Strings.Unbounded;
+   package Travel_Pkg    renames Active.Travel;
    package Infra_Id_List renames Shared.Infra_Id_List;
 
    use Agent_Id_Set;
@@ -40,6 +44,8 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage is
 
    -- parked vehicles
       Garage_Instance.Parked_Vehicles  := new Garage.Parked_Vehicles;
+      Garage_Instance.Parked_Vehicles.Set_Traveller_Utils (
+         Garage_Instance.T_Utils);
 
    -- pending vehicles
       Garage_Instance.Pending_Vehicles  := new Garage.Pending_Vehicles;
@@ -307,6 +313,10 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage is
          Found            :    out Boolean)
       is
          First_Vehicle  : Agent_Id_Set.Cursor;
+         Source         : Slice.Map
+            := T_Utils.Get_Travel_Source (Traveller_Id);
+         Destination    : Slice.Map
+            := T_Utils.Get_Travel_Destination (Traveller_Id);
       begin
          First_Vehicle := Vehicles.First;
 
@@ -317,6 +327,14 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage is
 
          Vehicle_Id := Vehicles.First_Element;
          Found := True;
+         T_Utils.Set_Travel(
+            Vehicle_Id,
+            Travel_Pkg.Create (
+               Route_Source      => Source,
+               Route_Destination => Destination,
+               Travel_State      => Travel_Pkg.Travel_Planning.Get_Instance,
+               Traveller_Id      => Vehicle_Id)
+         );
          Pending_Vehicles.Put_Vehicle (Vehicle_Id, Traveller_Id);
          Vehicles.Delete_First;
       end Board_Vehicle;
@@ -361,6 +379,12 @@ package body Reactive.Infrastructure.Building.Parking_Manager.Garage is
 
       function Contains (Vehicle_Id : in Agent.Agent_Id) return Boolean
       is (Vehicles.Contains (Vehicle_Id));
+
+      procedure Set_Traveller_Utils (
+         T_Utils_Arg : access Traveller_Utils.Object'Class := null) is
+      begin
+         T_Utils := T_Utils_Arg;
+      end Set_Traveller_Utils;
 
       function Dump return G_JSON.JSON_Array
       is

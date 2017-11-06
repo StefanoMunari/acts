@@ -168,6 +168,9 @@ private
 
       function Get_Size return Natural;
 
+      procedure Set_Traveller_Utils (
+         T_Utils_Arg : access Traveller_Utils.Object'Class := null);
+
       function Contains (Vehicle_Id : in Agent.Agent_Id) return Boolean;
 
       function Dump return G_JSON.JSON_Array;
@@ -176,6 +179,7 @@ private
       Size     : Natural;
       Host_Id  : Infra_Id;
       Vehicles : Agent_Id_Set.Set := Agent_Id_Set.Empty_Set;
+      T_Utils  : access Traveller_Utils.Object'Class := null;
    end Parked_Vehicles;
 
    protected type Pending_Vehicles is

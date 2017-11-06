@@ -66,6 +66,17 @@ package Active.Traveller.Utils.Mock is
    return Natural;
 
    overriding
+   procedure Set_Travel (This         : in out Mock.Object;
+                         Traveller_Id : in     Agent.Agent_Id;
+                         Travel       : access Active.Travel.Object'Class)
+   is null;
+
+   overriding
+   function Get_Travel_Source (This         : in     Mock.Object;
+                               Traveller_Id : in     Agent.Agent_Id)
+   return Slice.Map;
+
+   overriding
    function Get_Travel_Destination (This         : in     Mock.Object;
                                     Traveller_Id : in     Agent.Agent_Id)
    return Slice.Map;
@@ -128,6 +139,12 @@ package Active.Traveller.Utils.Mock is
       Traveller_Ref : in     Active.Traveller.Mock.Reference);
 
    not overriding
+   procedure Set_Return_Value_For_Get_Travel_Source (
+      This         : in out Traveller.Utils.Mock.Object;
+      Traveller_Id : in     Agent.Agent_Id;
+      Source       : in     Slice.Map);
+
+   not overriding
    procedure Set_Return_Value_For_Get_Travel_Destination (
       This         : in out Traveller.Utils.Mock.Object;
       Traveller_Id : in     Agent.Agent_Id;
@@ -178,6 +195,7 @@ private
       Get_List_From_Slice : Infra_Id_List.List;
       Get_List_From_Slice_Existence : Boolean := False;
       Get_Travel_Destination : Agent_Id_To_Slice_Map.Map;
+      Get_Travel_Source : Agent_Id_To_Slice_Map.Map;
       Get_Size : Natural;
       Get_Size_Existence : Boolean := False;
    end record;
