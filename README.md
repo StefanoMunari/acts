@@ -29,14 +29,14 @@ A quick guide for our simulator can be found at [this link](https://github.com/S
 
 ## Brief description
 
-ACTS is a heterogenous distributed systems which is able to simulate the
+ACTS is a heterogeneous distributed system which is able to simulate the
 traffic of a city.
 
 Its architecture is represented by the following figure:
 
 ![ACTS Architecture](images/architecture.png "Overall architecture")
 
-In fact, users can watch simulations by means of a frontend, which is composed
+Users can watch simulations by means of a frontend, which is composed
 of a [User Viewer](app/frontend/apps/interface/web/) and an [Application
 Server](app/frontend/).
 
