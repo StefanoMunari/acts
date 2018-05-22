@@ -14,7 +14,7 @@ development history of this project.**
 Project for the [Concurrent and Distributed Systems course 2015/2016](http://www.math.unipd.it/~tullio/SCD/2015/)
 at [University of Padua - MSc level](http://informatica.math.unipd.it/laureamagistrale/indexen.html).
 
-Documentation of the ACTS project can be found at [this link](https://github.com/StefanoMunari/acts-docs/releases/download/release-1.0-report/atcs-report-v1.0.0.pdf).
+Documentation of the ACTS project can be found at [this link (project report)](https://github.com/StefanoMunari/acts-docs/releases/).
 
 This repository includes the source code of the ACTS simulator, divided as
 follows:
@@ -25,7 +25,7 @@ follows:
 * `mw`: source code of the Middleware Layer for the backend
 * `<ROOT_DIR>`: scripts to build, run and clean the system
 
-A quick guide for our simulator can be found at [this link](https://github.com/StefanoMunari/acts-docs/releases/download/v1.0.0-user-manual/user-manual-v1.0.0.pdf).
+A quick guide for our simulator can be found at [this link (user manual)](https://github.com/StefanoMunari/acts-docs/releases/).
 
 ## Brief description
 
